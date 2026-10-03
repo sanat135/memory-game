@@ -50,7 +50,7 @@ h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(37px, 3.8v
 .card:not(.is-open):hover .card-back { background: #365d4b; }
 .card:not(.is-open):hover .card-mark { transform: rotate(20deg); }
 .card-front { background: #fffdf7; border: 1px solid #d9dfcd; flex-direction: column; gap: 2px; transform: rotateY(180deg); box-shadow: 0 3px 0 #e3e5d9; }
-.card-image { width: 64%; height: 64%; object-fit: contain; }
+.card-image { display: block; width: 76%; aspect-ratio: 1; background-image: url('../assets/produce.png'); background-size: 400% 200%; background-repeat: no-repeat; border-radius: 8px; mix-blend-mode: multiply; }
 .card-name { font-size: 9px; color: #75806e; }
 .is-matched .card-front { background: #e9efdf; border-color: #bdcca9; }
 .is-matched { cursor: default; }

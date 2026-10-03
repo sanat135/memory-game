@@ -1,5 +1,5 @@
 import { element, button } from './dom.js';
-import { MemoryGame } from './game.js';
+import { MemoryGame, PLANTS } from './game.js';
 import { createModal } from './modal.js';
 import { readResults, saveResult, formatDate } from './storage.js';
 
@@ -13,7 +13,7 @@ const header = element('header', 'header');
 const brand = element('div', 'brand');
 const brandMark = element('span', 'brand-mark', '✳');
 brandMark.setAttribute('aria-hidden', 'true');
-brand.append(brandMark, element('span', '', 'тихий сад'));
+brand.append(brandMark, element('span', '', 'спелая память'));
 const nav = element('nav', 'header-actions');
 nav.setAttribute('aria-label', 'Управление игрой');
 const restart = button('↻  Новая игра', 'button button-primary', startGame);
@@ -23,10 +23,10 @@ header.append(brand, nav);
 
 const main = element('main', 'main');
 const intro = element('section', 'intro');
-intro.append(element('p', 'eyebrow', 'MEMORY GAME / 01'), element('h1', '', 'Маленькая пауза.\nБольшая польза.'),
-  element('p', 'intro-copy', 'Откройте карточки, запомните детали\nи найдите друг друга в этом маленьком саду.'));
+intro.append(element('p', 'eyebrow', 'ОВОЩИ, ФРУКТЫ И НЕМНОГО ВНИМАНИЯ'), element('h1', '', 'Соберите пары.\nПоймайте вкус.'),
+  element('p', 'intro-copy', 'Сочные фрукты и хрустящие овощи.\nЗапомните, где они, и соберите весь урожай.'));
 const instructions = element('div', 'instructions');
-instructions.append(element('span', 'instruction-number', '01 — 02'), element('p', '', 'Две карточки. Один ход.\nВосемь пар — и сад собран.'));
+instructions.append(element('span', 'instruction-number', '01 — 02'), element('p', '', 'Две карточки. Один ход.\nВосемь пар — и урожай собран.'));
 const note = element('p', 'intro-note', 'Не спешите. Здесь важна внимательность.');
 intro.append(instructions, note);
 
@@ -71,10 +71,10 @@ function makeCard(card, index) {
   const backMark = element('span', 'card-mark', '✳');
   back.append(backMark);
   const front = element('span', 'card-side card-front');
-  const img = element('img', 'card-image');
-  img.src = `./assets/${card.id}.svg`;
-  img.alt = '';
-  img.draggable = false;
+  const img = element('span', 'card-image');
+  const spriteIndex = PLANTS.findIndex((plant) => plant.id === card.id);
+  img.dataset.produce = card.id;
+  img.style.backgroundPosition = `${(spriteIndex % 4) * 100 / 3}% ${Math.floor(spriteIndex / 4) * 100}%`;
   front.append(img, element('span', 'card-name', card.name));
   inner.setAttribute('aria-hidden', 'true');
   front.setAttribute('aria-hidden', 'true');
@@ -99,7 +99,7 @@ function render(state) {
   movesValue.textContent = state.moves;
   pairsValue.textContent = `${state.pairs} / 8`;
   [...progress.children].forEach((dot, index) => dot.classList.toggle('filled', index < state.pairs));
-  if (state.finished) status.textContent = `Сад собран! Ходов: ${state.moves}.`;
+  if (state.finished) status.textContent = `Урожай собран! Ходов: ${state.moves}.`;
   else if (state.locked) status.textContent = 'Не пара. Запомните — и попробуйте снова.';
   else if (state.first) status.textContent = 'Теперь откройте вторую карточку.';
   else status.textContent = state.pairs ? `Найдено пар: ${state.pairs} из 8. Продолжайте!` : 'Начните с любой карточки';
@@ -113,7 +113,7 @@ function win(moves) {
   content.append(element('div', 'win-flower', '✳'), element('p', '', 'Все восемь пар нашли друг друга.'),
     element('p', 'win-score', `${moves} ходов`), element('p', 'muted', 'Ещё одна маленькая победа вашей памяти.'));
   if (saveFailed) content.append(element('p', 'storage-note', 'Браузер не разрешил сохранить результат. Он доступен до перезагрузки страницы.'));
-  modal.open({ eyebrow: 'ПРЕКРАСНАЯ РАБОТА', title: 'Ваш сад собран!', content,
+  modal.open({ eyebrow: 'ПРЕКРАСНАЯ РАБОТА', title: 'Урожай собран!', content,
     action: { text: 'Новая игра', handler: startGame } });
 }
 

@@ -2,11 +2,11 @@ export const PLANTS = [
   { id: 'lemon', name: 'Лимон' },
   { id: 'cherry', name: 'Вишня' },
   { id: 'pear', name: 'Груша' },
-  { id: 'flower', name: 'Ромашка' },
-  { id: 'leaf', name: 'Лист' },
-  { id: 'mushroom', name: 'Гриб' },
   { id: 'strawberry', name: 'Клубника' },
-  { id: 'blueberry', name: 'Черника' },
+  { id: 'tomato', name: 'Томат' },
+  { id: 'carrot', name: 'Морковь' },
+  { id: 'eggplant', name: 'Баклажан' },
+  { id: 'broccoli', name: 'Брокколи' },
 ];
 
 export function createDeck(random = Math.random) {
@@ -21,7 +21,9 @@ export function createDeck(random = Math.random) {
 }
 
 export class MemoryGame {
-  constructor({ onChange = () => {}, onWin = () => {}, schedule = setTimeout, cancel = clearTimeout } = {}) {
+  constructor({ onChange = () => {}, onWin = () => {},
+    schedule = (callback, delay) => setTimeout(callback, delay),
+    cancel = (id) => clearTimeout(id) } = {}) {
     this.onChange = onChange;
     this.onWin = onWin;
     this.schedule = schedule;

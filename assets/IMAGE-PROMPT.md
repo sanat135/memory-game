@@ -1,0 +1,7 @@
+# Источник изображений
+
+`produce.png` создан встроенным инструментом imagegen для этого проекта. Это единый атлас 4 × 2: лимон, вишня, груша, клубника; томат, морковь, баклажан, брокколи. Файл используется локально; обрезка отдельных карточек выполняется CSS.
+
+## Запрос генерации
+
+Use case: product-mockup. Asset type: one production sprite atlas for a fruit and vegetable memory card game. Create ONE wide 2:1 image, exact four-column two-row invisible grid, all eight equal square cells. Each cell has a single centered isolated beautiful photorealistic fresh produce subject, generous clean margin (object within central 70% of each cell), solid uniform warm ivory background #fffdf7, identical soft studio light and subtle natural contact shadow. No grid lines, borders, text, letters, numbers, logos or watermark. Precise cell order: TOP ROW left to right: 1 whole yellow lemon with one small green leaf; 2 pair of glossy red cherries joined by stems; 3 whole green golden pear; 4 one ripe red strawberry with green crown. BOTTOM ROW left to right: 1 ripe red tomato with green calyx; 2 two small orange carrots with short fresh green tops; 3 glossy deep purple eggplant with green cap; 4 one compact broccoli floret with green stalk. All subjects visibly different, luscious natural textures, premium food photography, botanical accuracy. Every subject completely contained within its own square cell, no overlapping adjacent cells. Frame and size subjects consistently so they read clearly at tiny card size.
